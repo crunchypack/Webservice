@@ -15,7 +15,26 @@ $connection = mysqli_connect("localhost", "root", "", "workout") or die ("Error"
 switch($method){
     case "GET":
         $sql = "SELECT * FROM log ORDER BY day DESC";
-        if (isset($request[1])) $sql = $sql . " WHERE id = ". $request[1]. ";";
+        if (isset($request[1])) {
+            if(is_numeric($request[1])){
+                $sql = "SELECT * FROM log WHERE id = ". $request[1]. ";";
+            }
+            else{
+                $sql = "SELECT * FROM log WHERE exercise = '". $request[1]."' ORDER BY day;";
+            }
+            if (isset($request[2]) && isset($request[3]) && !is_numeric($request[1])){
+                $d1 = $request[2];
+                $d2 = $request[3];
+                $ex = $request[1];
+                if($request[1] == "all"){
+                    $sql = "SELECT * FROM log WHERE day BETWEEN '" . $d1 . "' AND '" . $d2 . "';";
+                }else{
+                    $sql = "SELECT * FROM log WHERE day BETWEEN '".$d1."' AND '".$d2."' AND exercise = '".$ex."';";
+                }
+                
+            }
+        }
+        
         break;
     case "PUT":
         $st = $connection->prepare('UPDATE log SET day = ?, exercise = ?, duration = ?, distance = ?, notes = ? WHERE id = ?');

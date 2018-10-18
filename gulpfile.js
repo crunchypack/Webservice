@@ -10,7 +10,7 @@ const imagemin  = require("gulp-imagemin");
 /* Move html-files to publication folder*/
 gulp.task('copyhtmlphp', function(){
   return  gulp.src("src/*.{html,php}")
-        .pipe(gulp.dest("pub/"));
+        .pipe(gulp.dest("../../../../../xampp/htdocs/webb"));
 });
 
 /* Minify and concat css */
@@ -20,20 +20,20 @@ gulp.task('scss', function(){
         .pipe(sass().on('error',sass.logError))
         .pipe(sourcemap.write())
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest('pub/css'));
+        .pipe(gulp.dest('../../../../../xampp/htdocs/webb/css'));
 });
 /* Concat and minify JavaScript files*/
 gulp.task('concminjs',function(){
     return gulp.src("src/js/*.js")
         .pipe(concat("main.min.js"))
         .pipe(uglify())
-        .pipe(gulp.dest("pub/js"));
+        .pipe(gulp.dest("../../../../../xampp/htdocs/webb/js"));
 });
 /* Minify images */
 gulp.task('mini-img', function(){
     return gulp.src("src/images/*")
         .pipe(imagemin())
-        .pipe(gulp.dest("pub/images"));
+        .pipe(gulp.dest("../../../../../xampp/htdocs/webb/images"));
 });
 /* Check for changes in files */
 gulp.task("watcher", function(){
