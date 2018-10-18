@@ -14,7 +14,7 @@ $connection = mysqli_connect("localhost", "root", "", "workout") or die ("Error"
 
 switch($method){
     case "GET":
-        $sql = "SELECT id, day, exercise, duration, distance, notes FROM log";
+        $sql = "SELECT * FROM log ORDER BY day DESC";
         if (isset($request[1])) $sql = $sql . " WHERE id = ". $request[1]. ";";
         break;
     case "PUT":
@@ -38,7 +38,7 @@ switch($method){
 
 $arr = [];
 
-if($method != "GET") $sql = "SELECT id, day, exercise, duration, distance, notes FROM log";
+if($method != "GET") $sql = "SELECT * FROM log ORDER BY day DESC";
 $res = mysqli_query($connection, $sql) or die (mysqli_error($connection));
 
 while($row = mysqli_fetch_assoc($res)){

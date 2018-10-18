@@ -1,6 +1,13 @@
 @import 'reset';
 @import 'media';
+$bg-color: rgb(109, 105, 105);
 
 body{
     background: url("../images/background.gif") repeat;
+}
+#logs{
+    background-color: $bg-color;
+}
+.save{
+    display: none;
 }
