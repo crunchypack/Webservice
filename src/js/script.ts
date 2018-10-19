@@ -29,7 +29,7 @@ class webService {
                 if (xh.status == 200) {
                     var json = JSON.parse(xh.responseText);
                     for (var i = 0; i < json.length; i++) { // Each log is rendered in a table
-                        log.innerHTML += "</td><td id ='day_"+json[i].id+"'>" + json[i].day + "</td><td id = 'ex_"+json[i].id+"'>" + json[i].exercise + "</td><td id ='dur_"+json[i].id+"'>" + json[i].duration + "</td><td id ='dis_"+json[i].id+"'>" + json[i].distance + "</td><td id ='note_"+json[i].id+"'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row("+json[i].id+")> <input type='button' id = 'edit_"+json[i].id+"' onclick = 'edit_row("+json[i].id+")' value = 'Edit'><input type='button' id= 'save_"+json[i].id+"' onclick ='save_row("+json[i].id+")' value = 'Save' class ='save'></td>";
+                        log.innerHTML += "</td><td id ='day_"+json[i].id+"'>" + json[i].day + "</td><td id = 'ex_"+json[i].id+"'>" + json[i].exercise + "</td><td id ='dur_"+json[i].id+"'>" + json[i].duration + "</td><td id ='dis_"+json[i].id+"'>" + json[i].distance + " </td><td id ='note_"+json[i].id+"'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row("+json[i].id+")> <input type='button' id = 'edit_"+json[i].id+"' onclick = 'edit_row("+json[i].id+")' value = 'Edit'><input type='button' id= 'save_"+json[i].id+"' onclick ='save_row("+json[i].id+")' value = 'Save' class ='save'></td>";
                     }
                 }
                 else if (xh.status == 400) {
@@ -44,17 +44,16 @@ class webService {
         xh.send();
     }
     /**
-     * Use POST to add log
+     * Create new log using POST
+     * @param day day - 2000-01-01
+     * @param exc exercise
+     * @param dur duration
+     * @param dist distance
+     * @param note notes
      */
-    post(): void {
-        // Casting HTMLInputElement to avoid TS errors
-        let day = (<HTMLInputElement>document.getElementById("day")).value;
-        let exc = (<HTMLInputElement>document.getElementById("exercise")).value;
-        let dur = (<HTMLInputElement>document.getElementById("duration")).value;
-        let dist = (<HTMLInputElement>document.getElementById("distance")).value;
-        let note = (<HTMLInputElement>document.getElementById("notes")).value;
+    post(day,exc,dur,dist,note): void {
 
-        if (!(day != '' && exc != '' && dur != '')) location.reload();
+        if ((day != '' && exc != '' && dur != '')) location.reload();
         let json = { "day": day, "exercise": exc, "duration": dur, "distance": dist, "notes": note };
 
         var xh = new XMLHttpRequest();
@@ -111,22 +110,54 @@ class webService {
 document.addEventListener("DOMContentLoaded", function () {
     // variables, createing instance of webservice
     let start = new webService("http://localhost/webb/workoutlog.php/logs");
+    let filter = document.getElementById("filter_button");
     let sel = document.getElementById("ch_ex");
+    let add = document.getElementById('add');
 
     start.show("");
-
-    sel.addEventListener("click", function(){
+    /**
+     * Event for when filter button is pressed
+     */
+    filter.addEventListener("click", function(){
+        // Casting HTMLInputElement to avoid TS errors
         let f_d = (<HTMLInputElement>document.getElementById('from_d')).value;
         let t_d = (<HTMLInputElement>document.getElementById('to_d')).value;
 
         start.show((<HTMLInputElement>sel).value + "/" + f_d + "/" + t_d);
-    })
+    });
+
+    /**
+     * Event for when add button is pushed
+     * 
+     */
+    add.addEventListener("click", function(){
+        let day = (<HTMLInputElement>document.getElementById("day")).value;
+        let exc = (<HTMLInputElement>document.getElementById("exercise")).value;
+        let dur = (<HTMLInputElement>document.getElementById("duration")).value;
+        let dist = (<HTMLInputElement>document.getElementById("distance")).value;
+        let note = (<HTMLInputElement>document.getElementById("notes")).value;
+        let reg : RegExp =/^(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/;
+
+        if(reg.test(dur)){
+            start.post(day,exc,dur,dist,note);
+        }else{
+            alert("Duration should be filled = HH:MM:SS");
+            location.reload();
+            
+        }
+    
+        
+    });
+
+
 
 
 
 })
+
+
 /**
- * Function for when Edit button is push
+ * Function for when Edit button is pushed
  * @param x log id
  */
 function edit_row(x){

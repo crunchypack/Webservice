@@ -7,7 +7,7 @@ const cleanCSS  = require("gulp-clean-css");
 const sourcemap = require("gulp-sourcemaps");
 const imagemin  = require("gulp-imagemin");
 
-/* Move html-files to publication folder*/
+/* Move html- and php-files to publication folder*/
 gulp.task('copyhtmlphp', function(){
   return  gulp.src("src/*.{html,php}")
         .pipe(gulp.dest("../../../../../xampp/htdocs/webb"));
