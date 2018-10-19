@@ -1,13 +1,116 @@
 @import 'reset';
 @import 'media';
-$bg-color: rgb(109, 105, 105);
+$header-size: 300%;
+$font-header: 'Robot slab', sans-serif;
+$font-text: 'Roboto', sans-serif;
+$margin-auto: 0 auto;
+$blueLagoon: #008f95;
+$veniceBlue: #085f95;
+$deepBlush: #eb6e80;
+$cinnabar: #e24e42;
+$corn: #e9b000;
+
+@mixin transition ($time){
+    -webkit-transition-duration: $time;
+    transition-duration: $time;
+}
 
 body{
     background: url("../images/background.gif") repeat;
 }
+header{
+    text-align: center;
+    font-size: $header-size;
+    font-family: $font-header;
+    font-weight: bold;
+
+}
+h1{
+    background-color: $deepBlush;
+    color: rgb(27, 25, 25);
+    width: 50%;
+    margin: $margin-auto;
+}
+div{
+    margin: 5%;
+}
+#container{
+    width: 90%;
+    margin: $margin-auto;
+    font-family: $font-text;
+}
+#filter{
+    background-color: $blueLagoon;
+    padding: 1%;
+    text-align: center;
+    font-size: 130%;
+    width: 75%;
+    margin:5% auto;
+    
+}
+input[type="button"]{
+    font-size: 110%;
+    background-color: $corn; 
+    @include transition(0.4s);
+}
+input[type="button"]:hover {
+    background-color: $deepBlush;
+    color: white;
+}
+input[type="button"]:active{
+    background-color: $blueLagoon;
+}
+#filter_button{
+    width: 10%;
+}
+
+.ftext{
+    font-weight: bold;
+}
 #logs{
-    background-color: $bg-color;
+    background-color: $veniceBlue;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    color: $corn;
+    
+}
+td{
+    text-align: left;
+    padding: .3%; 
+}
+th{
+    padding: 1%;
+    
+    font-weight: bold;
+}
+.bedit, .bdelete{
+    width: 100%;
+    margin: 1.1% 0;
 }
 .save{
     display: none;
+    width: 100%;
 }
+#add_field{
+    background-color: $cinnabar;
+    padding: 2%;
+    width: 75%;   
+    position: relative;
+
+}
+form{
+    width: 100%;
+}
+#add{
+    padding: .5% 3%;
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+}
+

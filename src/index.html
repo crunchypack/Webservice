@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <title>Workout log</title>
 </head>
 
 <body>
     <header>
-        <h1>Workout log</h1>
+        <h1>Workout Log</h1>
     </header>
     <div id="container">
         <div id="filter">
-            <input type="date" id="from_d" >
-            to
-            <input type="date" name="toDate" id="to_d" >
-            <select id="ch_ex">
+          <label> <span class="ftext">Date from:</span><input type="date" id="from_d" ></label>
+           <label> <span class="ftext">to</span>
+            <input type="date" name="toDate" id="to_d" ></label>
+            <label><span class="ftext">Exercise:</span> <select id="ch_ex">
                 <option value="all">All</option>
                 <option value="Badminton">Badminton</option>
                 <option value="Cycling">Cycling</option>
@@ -31,7 +33,7 @@
                 <option value="Strength training">Strength training</option>
                 <option value="Treadmill running">Treadmill running</option>
                 <option value="Walking">Walking</option>
-            </select>
+            </select></label>
             <input type="button" value="Go" id="filter_button">
         </div>
         <div id="logs">
@@ -45,8 +47,8 @@
         </div>
         <div id="add_field">
             <form>
-                Date: <input type="date" id="day" value="2018-01-01" required    > <br>
-                Exercise:
+              <label> Date: <input type="date" id="day" value="2018-01-01" required    > </label> 
+               <label> Exercise:
                     <select id="exercise" required>
                         <option value="Badminton">Badminton</option>
                         <option value="Cycling">Cycling</option>
@@ -59,12 +61,12 @@
                         <option value="Strength training">Strength training</option>
                         <option value="Treadmill running">Treadmill running</option>
                         <option value="Walking">Walking</option>
-                    </select> <br>
+                    </select> </label> 
                 
-                Duration: <input type="text" name="duration" id="duration" placeholder="HH:MM:SS"  required><br>
-                Distance(km): <input type="number" step=".01" name="distance" id="distance" ><br>
-                Notes: <br> <textarea name="notes" id="notes" cols="30" rows="10" required></textarea>
-                <input type="submit" value="add log" id="add">
+               <label> Duration: <input type="text" name="duration" id="duration" placeholder="HH:MM:SS"  required> </label> 
+                <label>Distance(km): <input type="number" step=".01" name="distance" id="distance" ><br></label> 
+                <label>Notes: </label> <br> <textarea name="notes" id="notes" cols="50" rows="10" required></textarea>
+                <input type="button" value="Add log" id="add">
             </form>
         </div>
     </div>

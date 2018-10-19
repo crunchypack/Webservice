@@ -22,12 +22,12 @@ var webService = /** @class */ (function () {
         var xh = new XMLHttpRequest();
         xh.onreadystatechange = function () {
             var log = document.getElementById("alllogs");
-            log.innerHTML = "";
+            log.innerHTML = "<th>Day</th><th>Exercise</th><th>Duration</th><th>Distance</th><th>Notes</th>";
             if (xh.readyState == XMLHttpRequest.DONE) {
                 if (xh.status == 200) {
                     var json = JSON.parse(xh.responseText);
                     for (var i = 0; i < json.length; i++) { // Each log is rendered in a table
-                        log.innerHTML += "</td><td id ='day_" + json[i].id + "'>" + json[i].day + "</td><td id = 'ex_" + json[i].id + "'>" + json[i].exercise + "</td><td id ='dur_" + json[i].id + "'>" + json[i].duration + "</td><td id ='dis_" + json[i].id + "'>" + json[i].distance + " </td><td id ='note_" + json[i].id + "'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row(" + json[i].id + ")> <input type='button' id = 'edit_" + json[i].id + "' onclick = 'edit_row(" + json[i].id + ")' value = 'Edit'><input type='button' id= 'save_" + json[i].id + "' onclick ='save_row(" + json[i].id + ")' value = 'Save' class ='save'></td>";
+                        log.innerHTML += "</td><td id ='day_" + json[i].id + "'>" + json[i].day + "</td><td id = 'ex_" + json[i].id + "'>" + json[i].exercise + "</td><td id ='dur_" + json[i].id + "'>" + json[i].duration + "</td><td id ='dis_" + json[i].id + "'>" + json[i].distance + " </td><td id ='note_" + json[i].id + "'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row(" + json[i].id + ") class = 'bdelete'> <input type='button' id = 'edit_" + json[i].id + "' onclick = 'edit_row(" + json[i].id + ")' value = 'Edit' class='bedit'><input type='button' id= 'save_" + json[i].id + "' onclick ='save_row(" + json[i].id + ")' value = 'Save' class ='save'></td>";
                     }
                 }
                 else if (xh.status == 400) {
