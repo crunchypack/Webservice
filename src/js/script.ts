@@ -24,7 +24,7 @@ class webService {
         var xh = new XMLHttpRequest();
         xh.onreadystatechange = function () {
             var log = document.getElementById("alllogs");
-            log.innerHTML ="<th>Day</th><th>Exercise</th><th>Duration</th><th>Distance</th><th>Notes</th>";
+            log.innerHTML ="<th onclick = 'sortTable(0)'>Day</th><th onclick='sortTable(1)'>Exercise</th><th>Duration</th><th>Distance</th><th>Notes</th>";
             if (xh.readyState == XMLHttpRequest.DONE) {
                 if (xh.status == 200) {
                     var json = JSON.parse(xh.responseText);
@@ -109,7 +109,7 @@ class webService {
  */
 document.addEventListener("DOMContentLoaded", function () {
     // variables, createing instance of webservice
-    let start = new webService("http://localhost/webb/workoutlog.php/logs");
+    let start = new webService("https://simonlobo.ddns.net/workout/workoutlog.php/logs");
     let filter = document.getElementById("filter_button");
     let sel = document.getElementById("ch_ex");
     let add = document.getElementById('add');
@@ -178,7 +178,7 @@ function edit_row(x){
     var note_data = note.innerHTML;
     // Make the rows editable 
     day.innerHTML ="<input type='date' id='day_text"+x+"' value='"+day_data+"'>";
-    ex.innerHTML ="<input type='text' id='ex_text"+x+"' value='"+ex_data+"'>";
+    ex.innerHTML ="<select id='ex_text"+x+"' value='"+ex_data+"'> <option value = 'Badminton'> Badminton </option> <option value = 'Cycling'> Cycling </option> <option value = 'Hiking'> Hiking </option> <option value = 'Indoor cycling'> Indoor cycling </option> <option value = 'Jogging'> Jogging </option> <option value = 'Other indoor'> Other indoor </option> <option value = 'Other outdoor'> Other outdoor </option> <option value = 'Running'> Running </option> <option value = 'Strength training'> Strength training </option> <option value = 'Treadmill running'> Treadmill running </option> <option value = 'Walking'> Walking </option>";
     dur.innerHTML ="<input type='text' id='dur_text"+x+"' value='"+dur_data+"'>";
     dis.innerHTML ="<input type='text' id='dis_text"+x+"' value='"+dis_data+"'>";
     note.innerHTML ="<input type='text' id='note_text"+x+"' value='"+note_data+"'>";
@@ -194,7 +194,7 @@ function save_row(x){
     var dis_value = (<HTMLInputElement>document.getElementById("dis_text"+x)).value;
     var note_value = (<HTMLInputElement>document.getElementById("note_text"+x)).value;
     // create instace of webService
-    let upd = new webService("http://localhost/webb/workoutlog.php/logs");
+    let upd = new webService("https://simonlobo.ddns.net/workout/workoutlog.php/logs");
     // Update the log
     upd.update(x,day_value,ex_value,dur_value,dis_value,note_value);
     //Hide save buttton and show edit button
@@ -209,9 +209,67 @@ function del_row(x){
    var c = confirm("Are you sure you want to delete this log?");
    // If user agrees the delete method is called
    if(c == true){
-       let del = new webService("http://localhost/webb/workoutlog.php/logs");
+       let del = new webService("https://simonlobo.ddns.net/workout/workoutlog.php/logs");
        del.delete(x);
    }
     
 
 }
+/**
+ * Code taken from w3schools
+ *  
+ */
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("alllogs");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc"; 
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /* Check if the two rows should switch place,
+        based on the direction, asc or desc: */
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        // Each time a switch is done, increase this count by 1:
+        switchcount ++; 
+      } else {
+        /* If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again. */
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }

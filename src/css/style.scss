@@ -1,5 +1,6 @@
 @import 'reset';
 @import 'media';
+// Variables
 $header-size: 300%;
 $font-header: 'Robot slab', sans-serif;
 $font-text: 'Roboto', sans-serif;
@@ -10,14 +11,16 @@ $deepBlush: #eb6e80;
 $cinnabar: #e24e42;
 $corn: #e9b000;
 
+// mixin for transition 
 @mixin transition ($time){
     -webkit-transition-duration: $time;
     transition-duration: $time;
 }
-
+// Background image for body
 body{
     background: url("../images/background.gif") repeat;
 }
+//Header
 header{
     text-align: center;
     font-size: $header-size;
@@ -31,14 +34,17 @@ h1{
     width: 50%;
     margin: $margin-auto;
 }
+// General div rule
 div{
     margin: 5%;
 }
+// Container rules
 #container{
     width: 90%;
     margin: $margin-auto;
     font-family: $font-text;
 }
+// Filter area rules
 #filter{
     background-color: $blueLagoon;
     padding: 1%;
@@ -48,6 +54,7 @@ div{
     margin:5% auto;
     
 }
+// Button rules
 input[type="button"]{
     font-size: 110%;
     background-color: $corn; 
@@ -60,13 +67,11 @@ input[type="button"]:hover {
 input[type="button"]:active{
     background-color: $blueLagoon;
 }
-#filter_button{
-    width: 10%;
-}
 
 .ftext{
     font-weight: bold;
 }
+// Rules for logs 
 #logs{
     background-color: $veniceBlue;
 }
@@ -88,7 +93,12 @@ th{
     padding: 1%;
     
     font-weight: bold;
+
 }
+th:first-child, th:nth-child(2){
+    cursor: pointer;
+}
+// edit,delete and save button rules
 .bedit, .bdelete{
     width: 100%;
     margin: 1.1% 0;
@@ -97,6 +107,7 @@ th{
     display: none;
     width: 100%;
 }
+// add form rules
 #add_field{
     background-color: $cinnabar;
     padding: 2%;

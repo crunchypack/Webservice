@@ -16,7 +16,7 @@ if($request[0] != "logs"){
 // set headertype
 header("Content-Type: application/json; charset=UTF-8");
 // establich database connection
-$connection = mysqli_connect("localhost", "root", "", "workout") or die ("Error");
+$connection = mysqli_connect("localhost", "simon", "GrandApple", "workout") or die ("Error");
 // Depending on method prepare sql statement
 switch($method){
     //In case of GET
@@ -37,9 +37,9 @@ switch($method){
                 $d2 = $request[3];
                 $ex = $request[1];
                 if($request[1] == "all"){
-                    $sql = "SELECT * FROM log WHERE day BETWEEN '" . $d1 . "' AND '" . $d2 . "';";
+                    $sql = "SELECT * FROM log WHERE day BETWEEN '" . $d1 . "' AND '" . $d2 . "' ORDER BY day;";
                 }else{
-                    $sql = "SELECT * FROM log WHERE day BETWEEN '".$d1."' AND '".$d2."' AND exercise = '".$ex."';";
+                    $sql = "SELECT * FROM log WHERE day BETWEEN '".$d1."' AND '".$d2."' AND exercise = '".$ex."' ORDER BY day;";
                 }
                 
             }

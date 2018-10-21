@@ -1,4 +1,4 @@
-$break-small: 800px;
+$break-small: 600px;
 $break-large: 1024px;
 
 @mixin respond-to($media) {
@@ -13,20 +13,56 @@ $break-large: 1024px;
   }
 }
 
-img {
-    margin: 0 auto;
-    display: block;
-    border-radius: 100%;
-
-    @include respond-to(handhelds) { width: 90% ;}
-    @include respond-to(medium-screens) { width: 75%; }
-    @include respond-to(wide-screens) { width: 50%;}
-}
 
 #container {
-    margin: 1% auto;
     
     @include respond-to(handhelds) { width: 100% ; margin: 0;}
     @include respond-to(medium-screens) { width: 75%; }
-    @include respond-to(wide-screens) { width: 50%;}
+    @include respond-to(wide-screens) { width: 50%; }
+}
+#alllogs td, #alllogs th{
+  @include respond-to(handhelds){
+    display: none;
+  }
+}
+ #alllogs th:first-child,#alllogs th:nth-child(2),#alllogs th:nth-child(3), #alllogs td:first-child,#alllogs td:nth-child(2),#alllogs td:nth-child(3), #alllogs td:last-child{
+  @include respond-to(handhelds){
+    display: table-cell;
+  }
+}
+label{
+  @include respond-to(medium-screens){
+    display: inline-block;
+    margin: .6% 0;
+  }
+  @include respond-to(handhelds){
+    display: block;
+    margin: .7% .5%;
+  }
+}
+
+textarea{
+  @include respond-to(handhelds){
+    width: 100%;
+  }
+}
+header h1, .ftext{
+  @include respond-to(handhelds){
+    font-size: 80%;
+    
+  }
+}
+#filter_button{
+  @include respond-to(handhelds){
+    width: 50%;
+    margin: .9% .5%;
+  }
+  @include respond-to(wide-screens){
+    width: 10%;
+    margin: .5% .5%;
+  }
+  @include respond-to(medium-screens){
+    width: 30%;
+    margin: .5% .5%;
+  }
 }
