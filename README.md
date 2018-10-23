@@ -9,7 +9,8 @@ The purpose is to create a webservice with php. The process is easier with gulp 
 * **gulp-uglify** - Used for minifying JavaScript
 * **gulp-sass**   - Used to compile sass into CSS
 * **gulp-clean-css** - Used for minifying CSS
-* **gulp-imagemin** - Used for minigying images
+* **gulp-imagemin** - Used for minifying images
+* **gulp-htmlmin**  - Used for minifying html
 
 ----
 ## How it all works
