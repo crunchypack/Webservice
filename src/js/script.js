@@ -22,12 +22,12 @@ var webService = /** @class */ (function () {
         var xh = new XMLHttpRequest();
         xh.onreadystatechange = function () {
             var log = document.getElementById("alllogs");
-            log.innerHTML = "<th onclick = 'sortTable(0)'>Day</th><th onclick='sortTable(1)'>Exercise</th><th>Duration</th><th>Distance</th><th>Notes</th>";
+            log.innerHTML = "<tr><th onclick = 'sortTable(0)'>Day</th><th onclick='sortTable(1)'>Exercise</th><th>Duration</th><th>Distance</th><th>Notes</th></tr>";
             if (xh.readyState == XMLHttpRequest.DONE) {
                 if (xh.status == 200) {
                     var json = JSON.parse(xh.responseText);
                     for (var i = 0; i < json.length; i++) { // Each log is rendered in a table
-                        log.innerHTML += "</td><td id ='day_" + json[i].id + "'>" + json[i].day + "</td><td id = 'ex_" + json[i].id + "'>" + json[i].exercise + "</td><td id ='dur_" + json[i].id + "'>" + json[i].duration + "</td><td id ='dis_" + json[i].id + "'>" + json[i].distance + " </td><td id ='note_" + json[i].id + "'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row(" + json[i].id + ") class = 'bdelete'> <input type='button' id = 'edit_" + json[i].id + "' onclick = 'edit_row(" + json[i].id + ")' value = 'Edit' class='bedit'><input type='button' id= 'save_" + json[i].id + "' onclick ='save_row(" + json[i].id + ")' value = 'Save' class ='save'></td>";
+                        log.innerHTML += "<tr><td id ='day_" + json[i].id + "'>" + json[i].day + "</td><td id = 'ex_" + json[i].id + "'>" + json[i].exercise + "</td><td id ='dur_" + json[i].id + "'>" + json[i].duration + "</td><td id ='dis_" + json[i].id + "'>" + json[i].distance + " </td><td id ='note_" + json[i].id + "'>" + json[i].notes + "</td><td><input type='button' id='delete_" + json[i].id + "'  value='Delete' onclick = del_row(" + json[i].id + ") class = 'bdelete'> <input type='button' id = 'edit_" + json[i].id + "' onclick = 'edit_row(" + json[i].id + ")' value = 'Edit' class='bedit'><input type='button' id= 'save_" + json[i].id + "' onclick ='save_row(" + json[i].id + ")' value = 'Save' class ='save'></td></tr>";
                     }
                 }
                 else if (xh.status == 400) {
@@ -106,6 +106,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var sel = document.getElementById("ch_ex");
     var add = document.getElementById('add');
     start.show("");
+    // Set current day in add log form
+    document.getElementById('day').valueAsDate = new Date();
     /**
      * Event for when filter button is pressed
      */

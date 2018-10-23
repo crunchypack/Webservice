@@ -19,9 +19,9 @@
     <div id="container">
         <div id="filter"> <!--Div containing the filtering form-->
           <label> <span class="ftext">Date from:</span></label><input type="date" id="from_d" >
-           <label> <span class="ftext">to</span>
-            <input type="date" name="toDate" id="to_d" ></label></label>
-            <label><span class="ftext">Exercise:</span> <select id="ch_ex">
+           <label> <span class="ftext">to</span></label>
+            <input type="date" name="toDate" id="to_d" >
+            <label><span class="ftext">Exercise:</span> </label><select id="ch_ex">
                 <option value="all">All</option>
                 <option value="Badminton">Badminton</option>
                 <option value="Cycling">Cycling</option>
@@ -39,18 +39,22 @@
         </div>
         <div id="logs"> <!-- Container of the table with all the logs-->
             <table id="alllogs">
-                <th onclick="sortTable(0)">Day</th>
-                <th onclick="sortTable(1)">Exercise</th>
-                <th>Duration</th>
-                <th>Distance</th>
-                <th>Notes</th>
+                <tr>
+                    <th onclick="sortTable(0)">Day</th>
+                    <th onclick="sortTable(1)">Exercise</th>
+                    <th>Duration</th>
+                    <th>Distance</th>
+                    <th>Notes</th>
+                </tr>
+
             </table>
         </div>
         <div id="add_field"> <!-- Container for the add logs form-->
             <form>
-              <label> Date: <input type="date" id="day" value="2018-01-01" required    > </label> 
+              <label> Date: <input type="date" id="day" value="2018-01-01" required > </label> 
                <label> Exercise:
-                    <select id="exercise" required>
+                    <select id="exercise" required >
+                        <option value="">Choose..</option>
                         <option value="Badminton">Badminton</option>
                         <option value="Cycling">Cycling</option>
                         <option value="Hiking">Hiking</option>
