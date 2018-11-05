@@ -49,7 +49,7 @@ And makes SQL queries based on them. It echoes out the response in JSON.
 
 ### TypeScript
 
-The ts-file sends xmlhttp-request to the webservice using objects. HTML is rendered based and user input. The file must be compiled to JavaScript:
+The ts-file sends xmlhttp-request to the webservice using objects. HTML is rendered based on user input. The file must be compiled to JavaScript:
 
 ```sh
 
